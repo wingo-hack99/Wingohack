@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wingo Premium</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #080d1b;
+    color: white;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    max-width: 480px;
+    margin: auto;
+}
+
+.header {
+    text-align: center;
+    padding: 25px 10px;
+}
+
+.logo {
+    font-size: 34px;
+    font-weight: 900;
+    background: linear-gradient(90deg,#00e5ff,#a855f7);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.subtitle {
+    color: #8793ad;
+    margin-top: 10px;
+    font-size: 13px;
+    letter-spacing: 2px;
+}
+
+.card {
+    background: linear-gradient(145deg,#151e35,#101629);
+    border: 1px solid #263654;
+    border-radius: 22px;
+    padding: 25px;
+    margin-top: 20px;
+    box-shadow: 0 10px 35px #0007;
+}
+
+.section-title {
+    color: #9ba9c5;
+    font-size: 13px;
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+}
+
+input {
+    width: 100%;
+    padding: 18px;
+    background: #080f21;
+    border: 1px solid #344767;
+    border-radius: 13px;
+    color: white;
+    font-size: 22px;
+    text-align: center;
+    outline: none;
+}
+
+input:focus {
+    border-color: #00d9ff;
+    box-shadow: 0 0 15px #00d9ff33;
+}
+
+button {
+    width: 100%;
+    margin-top: 20px;
+    padding: 17px;
+    border: none;
+    border-radius: 13px;
+    background: linear-gradient(90deg,#00c6ff,#7b61ff);
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 5px 25px #00aaff44;
+}
+
+button:active {
+    transform: scale(.96);
+}
+
+/* WHATSAPP BUTTON */
+
+.whatsapp-btn {
+    display: block;
+    width: 100%;
+    margin-top: 13px;
+    padding: 16px;
+    border-radius: 13px;
+    background: linear-gradient(90deg,#128c45,#25d366);
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    font-size: 17px;
+    font-weight: bold;
+    box-shadow: 0 5px 20px #25d36633;
+    transition: .3s;
+}
+
+.whatsapp-btn:active {
+    transform: scale(.96);
+}
+
+.result-box {
+    text-align: center;
+    padding: 30px 10px;
+    display: none;
+    animation: appear .5s ease;
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.period-text {
+    color: #8c9ab5;
+    font-size: 15px;
+}
+
+.result-text {
+    font-size: 38px;
+    font-weight: bold;
+    margin-top: 15px;
+}
+
+.big {
+    color: #ff536b;
+}
+
+.small {
+    color: #00d9ff;
+}
+
+.number {
+    display: inline-block;
+    margin-top: 20px;
+    font-size: 55px;
+    font-weight: bold;
+    color: white;
+    background: #202c48;
+    padding: 15px 35px;
+    border-radius: 18px;
+    border: 1px solid #42577e;
+}
+
+.info {
+    text-align: center;
+    color: #8190ad;
+    font-size: 12px;
+    margin-top: 15px;
+}
+
+.history {
+    margin-top: 20px;
+}
+
+.history-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    margin-top: 10px;
+    background: #0b1428;
+    border: 1px solid #243450;
+    border-radius: 12px;
+    font-size: 14px;
+}
+
+.tag {
+    padding: 7px 12px;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+.tag.big {
+    background: #ff536b22;
+}
+
+.tag.small {
+    background: #00d9ff22;
+}
+
+.clear {
+    background: #25324d;
+    box-shadow: none;
+    font-size: 14px;
+    padding: 12px;
+}
+
+.footer {
+    text-align: center;
+    color: #62708a;
+    font-size: 11px;
+    margin: 30px 0;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+        <div class="logo">WINGO PRO</div>
+        <div class="subtitle">TREND'S ANALYSING</div>
+    </div>
+
+    <div class="card">
+
+        <div class="section-title">
+            ENTER PERIOD NUMBER
+        </div>
+
+        <input
+            type="number"
+            id="period"
+            placeholder="Enter Period"
+        >
+
+        <button onclick="predict()">
+            ✦ GENERATE RESULT
+        </button>
+
+        <!-- WHATSAPP CHANNEL BUTTON -->
+
+        <a
+            class="whatsapp-btn"
+            href="https://whatsapp.com/channel/0029Vb94rXX3rZZcMlsvRS1T"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+            🟢 JOIN WHATSAPP CHANNEL
+        </a>
+
+        <div class="result-box" id="resultBox">
+
+            <div class="period-text" id="periodResult">
+                PERIOD: 0000
+            </div>
+
+            <div class="result-text" id="resultText">
+                BIG
+            </div>
+
+            <div class="number" id="numberResult">
+                2
+            </div>
+
+            <div class="info">
+                Wingo analyzer
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="card">
+
+        <div class="section-title">
+            NUMBER CLASSIFICATION
+        </div>
+
+        <div class="history-item">
+            <span>0 - 4</span>
+            <span class="tag small">SMALL</span>
+        </div>
+
+        <div class="history-item">
+            <span>5 - 9</span>
+            <span class="tag big">BIG</span>
+        </div>
+
+    </div>
+
+    <div class="card history">
+
+        <div class="section-title">
+            RESULT HISTORY
+        </div>
+
+        <div id="historyList">
+            <div class="info">No results yet</div>
+        </div>
+
+        <button class="clear" onclick="clearHistory()">
+            CLEAR HISTORY
+        </button>
+
+    </div>
+
+    <div class="footer">
+        WINGO PRO • EDUCATIONAL RANDOM SIMULATOR
+        <br><br>
+        Results are random and do not predict actual outcomes.
+    </div>
+
+</div>
+
+<script>
+
+let historyData = [];
+
+function predict() {
+
+    let period = document.getElementById("period").value;
+
+    if (!period || Number(period) < 0) {
+        alert("Please enter a valid period!");
+        return;
+    }
+
+    let isBig = Math.random() < 0.5;
+
+    let number;
+    let category;
+
+    if (isBig) {
+
+        category = "BIG";
+        number = Math.floor(Math.random() * 5);
+
+    } else {
+
+        category = "SMALL";
+        number = Math.floor(Math.random() * 5) + 5;
+
+    }
+
+    let resultBox = document.getElementById("resultBox");
+    let resultText = document.getElementById("resultText");
+
+    resultBox.style.display = "block";
+
+    document.getElementById("periodResult").innerText =
+        "PERIOD: " + period;
+
+    resultText.innerText = category;
+
+    resultText.className =
+        "result-text " + category.toLowerCase();
+
+    document.getElementById("numberResult").innerText =
+        number;
+
+    historyData.unshift({
+        period: period,
+        category: category,
+        number: number
+    });
+
+    updateHistory();
+
+}
+
+function updateHistory() {
+
+    let list = document.getElementById("historyList");
+
+    list.innerHTML = "";
+
+    historyData.forEach(item => {
+
+        let row = document.createElement("div");
+
+        row.className = "history-item";
+
+        let period = document.createElement("span");
+        period.textContent = "Period: " + item.period;
+
+        let category = document.createElement("span");
+        category.className =
+            "tag " + item.category.toLowerCase();
+
+        category.textContent =
+            item.category + " / " + item.number;
+
+        row.appendChild(period);
+        row.appendChild(category);
+
+        list.appendChild(row);
+
+    });
+
+}
+
+function clearHistory() {
+
+    historyData = [];
+
+    document.getElementById("historyList").innerHTML =
+        '<div class="info">No results yet</div>';
+
+}
+
+</script>
+
+</body>
+  </html>
